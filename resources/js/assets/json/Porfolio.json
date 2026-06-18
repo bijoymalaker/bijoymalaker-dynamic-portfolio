@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "QuickBite",
+    "category": "Web Development",
+    "img": "../images/project1.jpg",
+    "link": "https://quicckbitee.netlify.app/"
+  },
+  {
+    "id": 2,
+    "title": "Pretty Picks",
+    "category": "Web Development",
+    "img": "../images/project2.jpg",
+    "link": "https://prettypicks.netlify.app/"
+  },
+  {
+    "id": 3,
+    "title": "Doin Website",
+    "category": "Web Design",
+    "img": "../images/project3.jpg",
+    "link": "https://bijoymalaker.github.io/doin-website/"
+  },
+  {
+    "id": 4,
+    "title": "Project Burger",
+    "category": "Applications",
+    "img": "../images/project4.jpg",
+    "link": "https://bijoymalaker.github.io/project_burger/"
+  },
+  {
+    "id": 5,
+    "title": "Simple Project",
+    "category": "Web Design",
+    "img": "../images/project5.jpg",
+    "link": "#"
+  },
+  {
+    "id": 6,
+    "title": "All things party 1st",
+    "category": "Shopify",
+    "img": "../images/project5.jpg",
+    "link": "https://allthingsparty1st.com/"
+  },
+  {
+    "id": 7,
+    "title": "Store Design",
+    "category": "Shopify",
+    "img": "../images/project5.jpg",
+    "link": "https://wanderlightly.com/"
+  },
+  {
+    "id": 8,
+    "title": "Wix to Shopify Design",
+    "category": "Shopify",
+    "img": "../images/project5.jpg",
+    "link": "https://wetx0u-vx.myshopify.com"
+  },
+  {
+    "id": 9,
+    "title": "Shopify Store Design",
+    "category": "Shopify",
+    "img": "../images/project5.jpg",
+    "link": "https://4dbzdd-e8.myshopify.com/"
+  }
+]

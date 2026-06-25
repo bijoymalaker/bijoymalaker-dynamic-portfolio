@@ -1,46 +1,47 @@
 <script setup>
-    import { ref } from 'vue';
-    import projectsData from '../assets/json/Projects.json';
-    import icondesign from '../assets/images/icondesign.svg';
-    import iconapp from '../assets/images/iconapp.svg';
-    import icondev from '../assets/images/icondev.svg';
-    import iconphoto from '../assets/images/iconphoto.svg';
-    import { Head } from '@inertiajs/vue3';
-    const serviceItem = ref([
-        {
-            id: 1,
-            name: 'Web design',
-            description:
-                'The most modern and high-quality design made at a professional level.',
-            img: icondesign,
-        },
-        {
-            id: 2,
-            name: 'Web development',
-            description:
-                'High-quality development of sites at the professional level using PHP, Laravel.',
-            img: icondev,
-        },
-        {
-            id: 3,
-            name: 'Frontend development',
-            description:
-                'Professional development of applications for Website using ReactJs, Vue3js.',
-            img: iconapp,
-        },
-        {
-            id: 4,
-            name: 'Photography',
-            description:
-                ' I make high-quality photos of any category at a professional level.',
-            img: iconphoto,
-        },
-    ]);
+import { ref } from 'vue';
+import projectsData from '../assets/json/Projects.json';
+import icondesign from '../assets/images/icondesign.svg';
+import iconapp from '../assets/images/iconapp.svg';
+import icondev from '../assets/images/icondev.svg';
+import iconphoto from '../assets/images/iconphoto.svg';
+import { Head } from '@inertiajs/vue3';
+const serviceItem = ref([
+    {
+        id: 1,
+        name: 'Web design',
+        description:
+            'The most modern and high-quality design made at a professional level.',
+        img: icondesign,
+    },
+    {
+        id: 2,
+        name: 'Web development',
+        description:
+            'High-quality development of sites at the professional level using PHP, Laravel.',
+        img: icondev,
+    },
+    {
+        id: 3,
+        name: 'Frontend development',
+        description:
+            'Professional development of applications for Website using ReactJs, Vue3js.',
+        img: iconapp,
+    },
+    {
+        id: 4,
+        name: 'CMS development',
+        description:
+            'Custom content management systems built with modern technologies like WordPress, Shopify, and more.',
+        img: iconphoto,
+    },
+]);
 
-    const projects = ref(projectsData);
+const projects = ref(projectsData);
 </script>
 
 <template>
+
     <Head title="About" />
     <article class="about active" data-page="about">
         <header>
@@ -72,11 +73,7 @@
             <h3 class="h3 service-title">What i'm doing</h3>
 
             <ul class="service-list">
-                <li
-                    class="service-item"
-                    v-for="item in serviceItem"
-                    key="item.id"
-                >
+                <li class="service-item" v-for="item in serviceItem" key="item.id">
                     <div class="service-icon-box">
                         <img :src="item.img" :alt="item.name" width="40" />
                     </div>
@@ -100,22 +97,10 @@
             <h3 class="h3 testimonials-title">Projects</h3>
 
             <ul class="testimonials-list has-scrollbar">
-                <li
-                    class="testimonials-item"
-                    v-for="project in projects"
-                    key="project.name"
-                >
-                    <div
-                        class="content-card text-center"
-                        data-testimonials-item
-                    >
-                        <a
-                            :href="project.link"
-                            class="h4 testimonials-item-title"
-                            data-testimonials-title
-                            target="_blank"
-                            ><b>{{ project.name }}</b></a
-                        >
+                <li class="testimonials-item" v-for="project in projects" key="project.name">
+                    <div class="content-card text-center" data-testimonials-item>
+                        <a :href="project.link" class="h4 testimonials-item-title" data-testimonials-title
+                            target="_blank"><b>{{ project.name }}</b></a>
 
                         <div class="testimonials-text" data-testimonials-text>
                             <p>{{ project.des }}</p>

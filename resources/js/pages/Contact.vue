@@ -1,4 +1,5 @@
 <template>
+
   <Head title="Contact" />
   <article class="contact active" data-page="contact">
     <header>
@@ -34,10 +35,14 @@
     </section>
   </article>
 </template>
-<script>
-export default {};
-</script>
-<style>
 
+
+<script setup>
+
+</script>
+
+
+
+<style>
 
 </style>

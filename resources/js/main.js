@@ -13,6 +13,7 @@ import {
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
 import AppLayout from '@/layouts/AppLayout.vue';
+import 'vue-toast-notification/dist/theme-sugar.css';
 import './style.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Bijoy Portfolio';

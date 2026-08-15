@@ -2,7 +2,42 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'About')->name('home');
-Route::inertia('/resume', 'Resume')->name('resume');
-Route::inertia('/portfolio', 'Portfolio')->name('portfolio');
-Route::inertia('/contact', 'Contact')->name('contact');
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
+
+Route::get('/', [FrontendController::class, 'about'])->name('home');
+Route::get('/resume', [FrontendController::class, 'resume'])->name('resume');
+Route::get('/portfolio', [FrontendController::class, 'portfolio'])->name('portfolio');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::post('/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    
+    Route::get('/projects', [AdminController::class, 'projects'])->name('admin.projects');
+    Route::post('/projects', [AdminController::class, 'storeProject'])->name('admin.projects.store');
+    Route::delete('/projects/{project}', [AdminController::class, 'destroyProject'])->name('admin.projects.destroy');
+
+    Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
+    Route::post('/services', [AdminController::class, 'storeService'])->name('admin.services.store');
+    Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
+
+    Route::get('/education', [AdminController::class, 'education'])->name('admin.education');
+    Route::post('/education', [AdminController::class, 'storeEducation'])->name('admin.education.store');
+    Route::delete('/education/{education}', [AdminController::class, 'destroyEducation'])->name('admin.education.destroy');
+
+    Route::get('/experience', [AdminController::class, 'experience'])->name('admin.experience');
+    Route::post('/experience', [AdminController::class, 'storeExperience'])->name('admin.experience.store');
+    Route::delete('/experience/{experience}', [AdminController::class, 'destroyExperience'])->name('admin.experience.destroy');
+
+    Route::get('/skills', [AdminController::class, 'skills'])->name('admin.skills');
+    Route::post('/skills', [AdminController::class, 'storeSkill'])->name('admin.skills.store');
+    Route::delete('/skills/{skill}', [AdminController::class, 'destroySkill'])->name('admin.skills.destroy');
+
+    Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');
+    Route::delete('/messages/{message}', [AdminController::class, 'destroyMessage'])->name('admin.messages.destroy');
+});

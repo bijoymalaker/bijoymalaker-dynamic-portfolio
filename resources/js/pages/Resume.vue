@@ -15,37 +15,15 @@
             </div>
 
             <ol class="timeline-list">
-                <li class="timeline-item">
+                <li class="timeline-item" v-for="edu in props.education" :key="edu.id">
                     <h4 class="h4 timeline-item-title">
-                        B.Sc in Computer Science and Engineering
+                        {{ edu.degree }}
                     </h4>
 
-                    <span>2019 — 2023</span>
+                    <span>{{ edu.years }}</span>
 
                     <p class="timeline-text">
-                        Dhaka City College, Dhaka (Under National University)
-                    </p>
-                </li>
-
-                <li class="timeline-item">
-                    <h4 class="h4 timeline-item-title">
-                        Higher Secondary School Certificate (HSC)
-                    </h4>
-
-                    <span>2016-2019</span>
-
-                    <p class="timeline-text">Notra Dame College, Mymensingh</p>
-                </li>
-
-                <li class="timeline-item">
-                    <h4 class="h4 timeline-item-title">
-                        Secondary School Certificate (SSC)
-                    </h4>
-
-                    <span>2011 — 2016</span>
-
-                    <p class="timeline-text">
-                        Bindubasini Govt. Boys' High School, Tangail
+                        {{ edu.institution }}
                     </p>
                 </li>
             </ol>
@@ -61,44 +39,13 @@
             </div>
 
             <ol class="timeline-list">
-                <li class="timeline-item">
-                    <h4 class="h4 timeline-item-title">Junior Web Developer</h4>
-                    <span>April 2025 - Continuous</span>
+                <li class="timeline-item" v-for="exp in props.experience" :key="exp.id">
+                    <h4 class="h4 timeline-item-title">{{ exp.title }}</h4>
+                    <span>{{ exp.years }}</span>
                     <p class="timeline-text">
-                        <b>SM Technology</b> <br />
-                        <b>Area of Expertise:</b>
-                        HTML5 & CSS3, Shopify Theme Development, Liquid<br />
-
-                        <b>Duties/Responsibilities:</b>
-                        Designed and maintained Shopify stores using custom
-                        Liquid templates and theme modifications.
-                    </p>
-                </li>
-                <li class="timeline-item">
-                    <h4 class="h4 timeline-item-title">
-                        Junior Front-end Developer
-                    </h4>
-                    <span>2024</span>
-                    <p class="timeline-text">
-                        <b>DevsStation</b> <br />
-                        <b>Area of Expertise:</b>
-                        HTML5 & CSS3 (0.2 yr), Vue JS (0.2 yr) <br />
-
-                        <b>Duties/Responsibilities:</b>
-                        I was working here as a remote part-time junior
-                        front-end developer.
-                    </p>
-                </li>
-
-                <li class="timeline-item">
-                    <h4 class="h4 timeline-item-title">Graphics Designer</h4>
-
-                    <span>2021-2022</span>
-
-                    <p class="timeline-text">
-                        <b>Fiverr</b> <br />
-                        <b>Area of Expertise:</b>
-                        Adobe Photoshop, Adobe Illustrator, Canva<br />
+                        <b>{{ exp.company }}</b> <br />
+                        <span v-if="exp.expertise"><b>Area of Expertise:</b> {{ exp.expertise }}<br /></span>
+                        <span v-if="exp.description"><b>Duties/Responsibilities:</b> {{ exp.description }}</span>
                     </p>
                 </li>
             </ol>
@@ -110,20 +57,20 @@
             <ul class="skills-list content-card">
                 <li
                     class="skills-item"
-                    v-for="(skillSet, index) in skills"
-                    :key="index"
+                    v-for="skill in props.skills"
+                    :key="skill.id"
                 >
                     <div class="title-wrapper">
-                        <h5 class="h5">{{ skillSet.name }}</h5>
-                        <data :value="skillSet.value"
-                            >{{ skillSet.value }}%</data
+                        <h5 class="h5">{{ skill.name }}</h5>
+                        <data :value="skill.percentage"
+                            >{{ skill.percentage }}%</data
                         >
                     </div>
 
                     <div class="skill-progress-bg">
                         <div
                             class="skill-progress-fill"
-                            :style="{ width: skillSet.value + '%' }"
+                            :style="{ width: skill.percentage + '%' }"
                         ></div>
                     </div>
                 </li>
@@ -132,9 +79,13 @@
     </article>
 </template>
 <script setup>
-import { ref } from 'vue';
-import skillsData from '../assets/json/Skills.json';
+import { Head } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
 
-const skills = ref(skillsData);
+const props = defineProps({
+    education: Array,
+    experience: Array,
+    skills: Array
+});
 </script>
 <style></style>

@@ -38,7 +38,12 @@ createInertiaApp({
             throw new Error(`Page not found: ${name}`);
         }
 
-        page.default.layout = page.default.layout || AppLayout;
+        if (name.startsWith('admin/')) {
+            // Admin pages handle their own layout or no default layout
+            page.default.layout = page.default.layout || null;
+        } else {
+            page.default.layout = page.default.layout || AppLayout;
+        }
 
         return page;
     },

@@ -1834,3 +1834,144 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+
+/*-----------------------------------*\
+  #ADMIN PANEL
+\*-----------------------------------*/
+
+.admin-wrapper {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #111111;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid #333;
+}
+
+.admin-logo {
+  padding: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.admin-logo h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+}
+
+.admin-nav {
+  margin-top: 1.5rem;
+  flex: 1;
+}
+
+.admin-link {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: #cccccc;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.admin-link:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.admin-link.active {
+  background-color: #333333;
+  color: #ffffff;
+  font-weight: 600;
+  border-left: 4px solid #3b82f6;
+}
+
+.admin-footer {
+  padding: 1.5rem;
+  margin-top: auto;
+  border-top: 1px solid #333;
+}
+
+.admin-back-btn {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.admin-back-btn:hover {
+  background-color: #2563eb;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: #000000;
+}
+
+/* Fix Tailwind hardcoded bg-white classes in cards */
+.admin-main .bg-white {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid #333;
+}
+
+.admin-main .text-gray-700,
+.admin-main .text-gray-800 {
+  color: #cccccc !important;
+}
+
+.admin-main h1, .admin-main h2 {
+  color: #ffffff !important;
+}
+
+.admin-main input,
+.admin-main textarea {
+  background-color: #222222 !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+.admin-main table th {
+  background-color: #222 !important;
+  color: #fff !important;
+  border-bottom: 1px solid #444;
+}
+
+.admin-main table td {
+  border-bottom: 1px solid #333 !important;
+}
+
+.admin-alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.admin-alert.success {
+  background-color: #064e3b;
+  color: #34d399;
+  border: 1px solid #059669;
+}
+
+.admin-alert.error {
+  background-color: #7f1d1d;
+  color: #fca5a5;
+  border: 1px solid #dc2626;
+}

@@ -18,19 +18,26 @@
     <section class="contact-form">
       <h3 class="h3 form-title">Contact Form</h3>
 
-      <form action="#" class="form" data-form>
+      <form @submit.prevent="submit" class="form" data-form>
         <div class="input-wrapper">
-          <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input />
+          <input type="text" v-model="form.fullname" name="fullname" class="form-input" placeholder="Full name" required data-form-input />
+          <div v-if="form.errors.fullname" class="error">{{ form.errors.fullname }}</div>
 
-          <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input />
+          <input type="email" v-model="form.email" name="email" class="form-input" placeholder="Email address" required data-form-input />
+          <div v-if="form.errors.email" class="error">{{ form.errors.email }}</div>
         </div>
 
-        <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+        <textarea v-model="form.message" name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+        <div v-if="form.errors.message" class="error">{{ form.errors.message }}</div>
 
-        <button class="form-btn" type="submit" disabled data-form-btn>
+        <button class="form-btn" type="submit" :disabled="form.processing" data-form-btn>
           <ion-icon name="paper-plane"></ion-icon>
-          <span>Send Message</span>
+          <span>{{ form.processing ? 'Sending...' : 'Send Message' }}</span>
         </button>
+
+        <div v-if="$page.props.flash?.success" class="success-message" style="color: green; margin-top: 10px;">
+           {{ $page.props.flash.success }}
+        </div>
       </form>
     </section>
   </article>
@@ -38,7 +45,19 @@
 
 
 <script setup>
+import { Head, useForm, usePage } from '@inertiajs/vue3';
 
+const form = useForm({
+  fullname: '',
+  email: '',
+  message: '',
+});
+
+const submit = () => {
+  form.post(route('contact.store'), {
+    onSuccess: () => form.reset(),
+  });
+};
 </script>
 
 

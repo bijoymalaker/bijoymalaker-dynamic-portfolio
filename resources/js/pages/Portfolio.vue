@@ -41,7 +41,7 @@
                 <ion-icon name="eye-outline"></ion-icon>
               </div>
 
-              <img :src="project.img" :alt="project.title" loading="lazy" />
+              <img :src="project.image_path ? `/storage/${project.image_path}` : `/assets/images/${project.image_path}`" :alt="project.title" loading="lazy" />
             </figure>
 
             <h3 class="project-title">{{ project.title }}</h3>
@@ -54,13 +54,17 @@
   </article>
 </template>
 <script setup>
-import { ref, computed } from 'vue';
-import projectsData from '../assets/json/Porfolio.json';
+import { ref, computed, defineProps } from 'vue';
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+  projects: Array
+});
 
 const selectedCategory = ref('All');
 const dropdownOpen = ref(false);
-const Projects = ref(projectsData);
+
+const Projects = computed(() => props.projects || []);
 
 const Categories = computed(() => {
   const cats = Projects.value.map((p) => p.category);

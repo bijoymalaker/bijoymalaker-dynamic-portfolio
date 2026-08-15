@@ -20,22 +20,27 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     
     Route::get('/projects', [AdminController::class, 'projects'])->name('admin.projects');
     Route::post('/projects', [AdminController::class, 'storeProject'])->name('admin.projects.store');
+    Route::post('/projects/{project}', [AdminController::class, 'updateProject'])->name('admin.projects.update');
     Route::delete('/projects/{project}', [AdminController::class, 'destroyProject'])->name('admin.projects.destroy');
 
     Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
     Route::post('/services', [AdminController::class, 'storeService'])->name('admin.services.store');
+    Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
     Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
 
     Route::get('/education', [AdminController::class, 'education'])->name('admin.education');
     Route::post('/education', [AdminController::class, 'storeEducation'])->name('admin.education.store');
+    Route::put('/education/{education}', [AdminController::class, 'updateEducation'])->name('admin.education.update');
     Route::delete('/education/{education}', [AdminController::class, 'destroyEducation'])->name('admin.education.destroy');
 
     Route::get('/experience', [AdminController::class, 'experience'])->name('admin.experience');
     Route::post('/experience', [AdminController::class, 'storeExperience'])->name('admin.experience.store');
+    Route::put('/experience/{experience}', [AdminController::class, 'updateExperience'])->name('admin.experience.update');
     Route::delete('/experience/{experience}', [AdminController::class, 'destroyExperience'])->name('admin.experience.destroy');
 
     Route::get('/skills', [AdminController::class, 'skills'])->name('admin.skills');
     Route::post('/skills', [AdminController::class, 'storeSkill'])->name('admin.skills.store');
+    Route::put('/skills/{skill}', [AdminController::class, 'updateSkill'])->name('admin.skills.update');
     Route::delete('/skills/{skill}', [AdminController::class, 'destroySkill'])->name('admin.skills.destroy');
 
     Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');

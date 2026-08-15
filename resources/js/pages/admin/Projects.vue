@@ -4,7 +4,7 @@
     <h1 class="text-3xl font-bold mb-6">Manage Projects</h1>
     
     <div class="bg-white p-6 rounded-lg shadow mb-8">
-      <h2 class="text-xl font-semibold mb-4">Add New Project</h2>
+      <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Project' : 'Add New Project' }}</h2>
       <form @submit.prevent="submit" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="block text-gray-700 font-bold mb-2">Title</label>
@@ -26,8 +26,13 @@
           <label class="block text-gray-700 font-bold mb-2">Image</label>
           <input type="file" @change="e => form.image = e.target.files[0]" class="w-full px-3 py-2 border rounded" accept="image/*" />
         </div>
-        <div class="md:col-span-2">
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" :disabled="form.processing">Add Project</button>
+        <div class="md:col-span-2 flex gap-2">
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" :disabled="form.processing">
+            {{ isEditing ? 'Update Project' : 'Add Project' }}
+          </button>
+          <button v-if="isEditing" type="button" @click="cancelEdit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
@@ -49,7 +54,8 @@
             </td>
             <td class="py-3 px-4">{{ project.title }}</td>
             <td class="py-3 px-4">{{ project.category }}</td>
-            <td class="py-3 px-4">
+            <td class="py-3 px-4 flex gap-2">
+              <button @click="editItem(project)" class="text-blue-500 hover:text-blue-700">Edit</button>
               <Link :href="`/admin/projects/${project.id}`" method="delete" as="button" class="text-red-500 hover:text-red-700">Delete</Link>
             </td>
           </tr>
@@ -62,6 +68,7 @@
 <script setup>
 import AdminLayout from '../../layouts/AdminLayout.vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps({
   projects: Array,
@@ -75,11 +82,35 @@ const form = useForm({
   image: null,
 });
 
+const isEditing = ref(false);
+const editingId = ref(null);
+
+const editItem = (item) => {
+  isEditing.value = true;
+  editingId.value = item.id;
+  form.title = item.title;
+  form.category = item.category;
+  form.description = item.description || '';
+  form.link = item.link || '';
+  form.image = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const cancelEdit = () => {
+  isEditing.value = false;
+  editingId.value = null;
+  form.reset();
+};
+
 const submit = () => {
-  form.post('/admin/projects', {
-    onSuccess: () => {
-      form.reset();
-    }
-  });
+  if (isEditing.value) {
+    form.post(`/admin/projects/${editingId.value}`, {
+      onSuccess: () => cancelEdit()
+    });
+  } else {
+    form.post('/admin/projects', {
+      onSuccess: () => form.reset()
+    });
+  }
 };
 </script>

@@ -41,7 +41,24 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'bio1' => 'required|string',
             'bio2' => 'nullable|string',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'birthday' => 'nullable|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'github' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
+            'avatar' => 'nullable|image|max:2048',
         ]);
+        
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('profile', 'public');
+            $validated['avatar_path'] = $path;
+        }
+
+        unset($validated['avatar']); // remove avatar from array before update
         
         $profile->update($validated);
         return redirect()->back()->with('success', 'Profile updated successfully.');
@@ -81,6 +98,30 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Project created successfully.');
     }
 
+    public function updateProject(Request $request, Project $project)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'link' => 'nullable|string',
+            'image' => 'nullable|image|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('projects', 'public');
+            $project->image_path = $path;
+        }
+
+        $project->title = $validated['title'];
+        $project->category = $validated['category'];
+        $project->description = $validated['description'];
+        $project->link = $validated['link'] ?? '';
+        $project->save();
+
+        return redirect()->back()->with('success', 'Project updated successfully.');
+    }
+
     public function destroyProject(Project $project)
     {
         $project->delete();
@@ -96,6 +137,11 @@ class AdminController extends Controller
         Service::create($validated);
         return redirect()->back()->with('success', 'Service created.');
     }
+    public function updateService(Request $request, Service $service) {
+        $validated = $request->validate(['name' => 'required', 'description' => 'nullable']);
+        $service->update($validated);
+        return redirect()->back()->with('success', 'Service updated.');
+    }
     public function destroyService(Service $service) {
         $service->delete();
         return redirect()->back()->with('success', 'Service deleted.');
@@ -110,6 +156,11 @@ class AdminController extends Controller
         Education::create($validated);
         return redirect()->back()->with('success', 'Education added.');
     }
+    public function updateEducation(Request $request, Education $education) {
+        $validated = $request->validate(['degree' => 'required', 'institution' => 'required', 'years' => 'required']);
+        $education->update($validated);
+        return redirect()->back()->with('success', 'Education updated.');
+    }
     public function destroyEducation(Education $education) {
         $education->delete();
         return redirect()->back()->with('success', 'Education deleted.');
@@ -117,12 +168,17 @@ class AdminController extends Controller
 
     // --- Experience ---
     public function experience() {
-        return Inertia::render('admin/Experience', ['experience' => Experience::all()]);
+        return Inertia::render('admin/Experience', ['experience' => Experience::latest()->get()]);
     }
     public function storeExperience(Request $request) {
         $validated = $request->validate(['title' => 'required', 'company' => 'required', 'years' => 'required', 'expertise' => 'nullable', 'description' => 'nullable']);
         Experience::create($validated);
         return redirect()->back()->with('success', 'Experience added.');
+    }
+    public function updateExperience(Request $request, Experience $experience) {
+        $validated = $request->validate(['title' => 'required', 'company' => 'required', 'years' => 'required', 'expertise' => 'nullable', 'description' => 'nullable']);
+        $experience->update($validated);
+        return redirect()->back()->with('success', 'Experience updated.');
     }
     public function destroyExperience(Experience $experience) {
         $experience->delete();
@@ -137,6 +193,11 @@ class AdminController extends Controller
         $validated = $request->validate(['name' => 'required', 'percentage' => 'required|numeric']);
         Skill::create($validated);
         return redirect()->back()->with('success', 'Skill added.');
+    }
+    public function updateSkill(Request $request, Skill $skill) {
+        $validated = $request->validate(['name' => 'required', 'percentage' => 'required|numeric']);
+        $skill->update($validated);
+        return redirect()->back()->with('success', 'Skill updated.');
     }
     public function destroySkill(Skill $skill) {
         $skill->delete();

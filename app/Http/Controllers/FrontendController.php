@@ -29,7 +29,7 @@ class FrontendController extends Controller
     public function resume()
     {
         $education = Education::all();
-        $experience = Experience::all();
+        $experience = Experience::latest()->get();
         $skills = Skill::all();
 
         return Inertia::render('Resume', [

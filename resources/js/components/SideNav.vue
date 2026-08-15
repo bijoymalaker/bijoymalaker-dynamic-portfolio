@@ -2,12 +2,13 @@
     <aside class="sidebar" :class="{ active: isActive }" data-sidebar>
       <div class="sidebar-info">
         <figure class="avatar-box">
-          <img src="../assets/images/myPic.jpg" alt="Bijoy Malaker" width="80">
+          <img v-if="$page.props.globalProfile?.avatar_path" :src="$page.props.globalProfile.avatar_path.startsWith('http') ? $page.props.globalProfile.avatar_path : `/storage/${$page.props.globalProfile.avatar_path}`" :alt="$page.props.globalProfile?.name" width="80" style="border-radius: 20px; object-fit: cover; width: 80px; height: 80px;">
+          <img v-else src="../assets/images/myPic.jpg" alt="Bijoy Malaker" width="80" style="border-radius: 20px; object-fit: cover; width: 80px; height: 80px;">
         </figure>
   
         <div class="info-content">
-          <h1 class="name" title="Bijoy Malaker">Bijoy Malaker</h1>
-          <p class="title">Web developer</p>
+          <h1 class="name" :title="$page.props.globalProfile?.name || 'Name'">{{ $page.props.globalProfile?.name || 'Name' }}</h1>
+          <p class="title">{{ $page.props.globalProfile?.title || 'Title' }}</p>
         </div>
   
         <button class="info_more-btn" @click="toggleInfo">
@@ -20,43 +21,43 @@
         <div class="separator"></div>
   
         <ul class="contacts-list">
-          <li class="contact-item">
+          <li class="contact-item" v-if="$page.props.globalProfile?.email">
             <div class="icon-box">
               <font-awesome-icon icon="fa-regular fa-envelope" />
             </div>
             <div class="contact-info">
               <p class="contact-title">Email</p>
-              <a href="mailto:bijoymalaker7@gmail.com" class="contact-link">bijoymalaker7@gmail.com</a>
+              <a :href="`mailto:${$page.props.globalProfile.email}`" class="contact-link">{{ $page.props.globalProfile.email }}</a>
             </div>
           </li>
   
-          <li class="contact-item">
+          <li class="contact-item" v-if="$page.props.globalProfile?.phone">
             <div class="icon-box">
               <font-awesome-icon icon="fa-solid fa-phone" />
             </div>
             <div class="contact-info">
               <p class="contact-title">Phone</p>
-              <a href="tel:+8801816615008" class="contact-link">+8801816615008</a>
+              <a :href="`tel:${$page.props.globalProfile.phone}`" class="contact-link">{{ $page.props.globalProfile.phone }}</a>
             </div>
           </li>
   
-          <li class="contact-item">
+          <li class="contact-item" v-if="$page.props.globalProfile?.birthday">
             <div class="icon-box">
               <font-awesome-icon icon="fa-solid fa-cake-candles" />
             </div>
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
-              <time datetime="2000-10-06">October 06, 2000</time>
+              <time :datetime="$page.props.globalProfile.birthday">{{ $page.props.globalProfile.birthday }}</time>
             </div>
           </li>
   
-          <li class="contact-item">
+          <li class="contact-item" v-if="$page.props.globalProfile?.location">
             <div class="icon-box">
               <font-awesome-icon icon="fa-solid fa-location-dot" />
             </div>
             <div class="contact-info">
               <p class="contact-title">Location</p>
-              <address>Mohammadpur, Dhaka, Bangladesh</address>
+              <address>{{ $page.props.globalProfile.location }}</address>
             </div>
           </li>
         </ul>
@@ -64,32 +65,32 @@
         <div class="separator"></div>
   
         <ul class="social-list">
-          <li class="social-item">
-            <a href="https://www.facebook.com/Bijoy.Malaker.71" class="social-link" target="_blank">
+          <li class="social-item" v-if="$page.props.globalProfile?.facebook">
+            <a :href="$page.props.globalProfile.facebook" class="social-link" target="_blank">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
   
-          <li class="social-item">
-            <a href="https://x.com/bijoymalaker" class="social-link" target="_blank">
+          <li class="social-item" v-if="$page.props.globalProfile?.twitter">
+            <a :href="$page.props.globalProfile.twitter" class="social-link" target="_blank">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
   
-          <li class="social-item">
-            <a href="https://www.instagram.com/bijoy.malaker.71/" class="social-link" target="_blank">
+          <li class="social-item" v-if="$page.props.globalProfile?.instagram">
+            <a :href="$page.props.globalProfile.instagram" class="social-link" target="_blank">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
   
-          <li class="social-item">
-            <a href="https://github.com/bijoymalaker" class="social-link" target="_blank">
+          <li class="social-item" v-if="$page.props.globalProfile?.github">
+            <a :href="$page.props.globalProfile.github" class="social-link" target="_blank">
               <ion-icon name="logo-github"></ion-icon>
             </a>
           </li>
   
-          <li class="social-item">
-            <a href="https://linkedin.com/in/bijoy-malaker" class="social-link" target="_blank">
+          <li class="social-item" v-if="$page.props.globalProfile?.linkedin">
+            <a :href="$page.props.globalProfile.linkedin" class="social-link" target="_blank">
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>

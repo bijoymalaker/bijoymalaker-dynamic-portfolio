@@ -59,4 +59,3 @@ createInertiaApp({
         color: '#ee4646',
     },
 });
-

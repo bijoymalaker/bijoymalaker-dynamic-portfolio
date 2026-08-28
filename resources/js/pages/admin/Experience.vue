@@ -45,10 +45,10 @@
         </form>
       </div>
 
-      <div class="overflow-hidden rounded bg-white shadow-sm">
+      <div class="overflow-hidden rounded shadow-sm">
         <div class="table-responsive">
-          <table class="mb-0 table">
-            <thead class="table-dark">
+          <table class="table table-dark table-striped-columns mb-0">
+            <thead>
               <tr>
                 <th>Title</th>
                 <th>Company</th>

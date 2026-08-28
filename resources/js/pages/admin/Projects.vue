@@ -39,9 +39,9 @@
       </form>
     </div>
 
-    <div class="bg-white rounded shadow-sm overflow-hidden">
+    <div class="rounded shadow-sm overflow-hidden">
       <div class="table-responsive">
-        <table class="table table-dark mb-0">
+        <table class="table table-dark table-striped-columns mb-0">
           <thead>
             <tr>
               <th>Image</th>

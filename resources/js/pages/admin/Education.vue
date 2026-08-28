@@ -31,10 +31,10 @@
       </form>
     </div>
 
-    <div class="bg-white rounded shadow-sm overflow-hidden">
+    <div class="rounded shadow-sm overflow-hidden">
       <div class="table-responsive">
-        <table class="table mb-0">
-          <thead class="table-dark">
+        <table class="table table-dark table-striped-columns mb-0">
+          <thead>
             <tr>
               <th>Degree</th>
               <th>Institution</th>

@@ -12,6 +12,7 @@ import {
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faFacebook, faXTwitter, faInstagram, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import AppLayout from '@/layouts/AppLayout.vue';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import './style.css';
@@ -28,6 +29,11 @@ library.add(
     faUserGraduate,
     faBookBookmark,
     faChevronDown,
+    faFacebook,
+    faXTwitter,
+    faInstagram,
+    faGithub,
+    faLinkedin
 );
 
 createInertiaApp({

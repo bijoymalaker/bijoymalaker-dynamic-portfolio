@@ -72,31 +72,31 @@
       <ul class="social-list">
         <li class="social-item" v-if="$page.props.globalProfile?.facebook">
           <a :href="$page.props.globalProfile.facebook" class="social-link" target="_blank">
-            <ion-icon name="logo-facebook"></ion-icon>
+            <font-awesome-icon icon="fa-brands fa-facebook" />
           </a>
         </li>
 
         <li class="social-item" v-if="$page.props.globalProfile?.twitter">
           <a :href="$page.props.globalProfile.twitter" class="social-link" target="_blank">
-            <ion-icon name="logo-twitter"></ion-icon>
+            <font-awesome-icon icon="fa-brands fa-x-twitter" />
           </a>
         </li>
 
         <li class="social-item" v-if="$page.props.globalProfile?.instagram">
           <a :href="$page.props.globalProfile.instagram" class="social-link" target="_blank">
-            <ion-icon name="logo-instagram"></ion-icon>
+            <font-awesome-icon icon="fa-brands fa-instagram" />
           </a>
         </li>
 
         <li class="social-item" v-if="$page.props.globalProfile?.github">
           <a :href="$page.props.globalProfile.github" class="social-link" target="_blank">
-            <ion-icon name="logo-github"></ion-icon>
+            <font-awesome-icon icon="fa-brands fa-github" />
           </a>
         </li>
 
         <li class="social-item" v-if="$page.props.globalProfile?.linkedin">
           <a :href="$page.props.globalProfile.linkedin" class="social-link" target="_blank">
-            <ion-icon name="logo-linkedin"></ion-icon>
+            <font-awesome-icon icon="fa-brands fa-linkedin" />
           </a>
         </li>
       </ul>

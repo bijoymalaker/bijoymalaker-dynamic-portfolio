@@ -25,7 +25,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
     Route::post('/services', [AdminController::class, 'storeService'])->name('admin.services.store');
-    Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
+    Route::post('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
     Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
 
     Route::get('/education', [AdminController::class, 'education'])->name('admin.education');

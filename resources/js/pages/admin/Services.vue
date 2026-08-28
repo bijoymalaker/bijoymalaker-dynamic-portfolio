@@ -13,6 +13,10 @@
             <label class="form-label fw-bold">Name</label>
             <input v-model="form.name" type="text" class="form-control" required />
           </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Icon</label>
+            <input type="file" @change="e => form.icon = e.target.files[0]" class="form-control" accept="image/*" />
+          </div>
           <div class="col-12">
             <label class="form-label fw-bold">Description</label>
             <textarea v-model="form.description" class="form-control"></textarea>
@@ -33,6 +37,7 @@
           <table class="table table-dark table-striped-columns mb-0">
             <thead>
               <tr>
+                <th>Icon</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Action</th>
@@ -40,9 +45,12 @@
             </thead>
             <tbody>
               <tr v-for="service in services" :key="service.id">
-                <td>{{ service.name }}</td>
-                <td>{{ service.description }}</td>
                 <td>
+                  <img v-if="service.icon_path" :src="service.icon_path.startsWith('http') ? service.icon_path : `/storage/${service.icon_path}`" class="object-fit-cover rounded" style="width: 40px; height: 40px;" />
+                </td>
+                <td class="align-middle">{{ service.name }}</td>
+                <td class="align-middle">{{ service.description }}</td>
+                <td class="align-middle">
                   <div class="d-flex gap-2">
                     <button @click="editItem(service)"
                       class="btn btn-link text-primary p-0 text-decoration-none">Edit</button>
@@ -71,6 +79,7 @@ const props = defineProps({
 const form = useForm({
   name: '',
   description: '',
+  icon: null,
 });
 
 const isEditing = ref(false);
@@ -81,6 +90,7 @@ const editItem = (item) => {
   editingId.value = item.id;
   form.name = item.name;
   form.description = item.description || '';
+  form.icon = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -92,7 +102,7 @@ const cancelEdit = () => {
 
 const submit = () => {
   if (isEditing.value) {
-    form.put(`/admin/services/${editingId.value}`, {
+    form.post(`/admin/services/${editingId.value}`, {
       onSuccess: () => cancelEdit()
     });
   } else {

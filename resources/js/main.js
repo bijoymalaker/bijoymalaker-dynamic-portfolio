@@ -7,11 +7,11 @@ import {
     faCakeCandles,
     faChevronDown,
     faEnvelope,
-    faEye,
     faLocationDot,
     faPhone,
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 import AppLayout from '@/layouts/AppLayout.vue';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import './style.css';

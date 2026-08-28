@@ -133,13 +133,41 @@ class AdminController extends Controller
         return Inertia::render('admin/Services', ['services' => Service::all()]);
     }
     public function storeService(Request $request) {
-        $validated = $request->validate(['name' => 'required', 'description' => 'nullable']);
-        Service::create($validated);
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'icon' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,ico|max:2048'
+        ]);
+        
+        $path = null;
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('services', 'public');
+        }
+
+        Service::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'icon_path' => $path,
+        ]);
+        
         return redirect()->back()->with('success', 'Service created.');
     }
     public function updateService(Request $request, Service $service) {
-        $validated = $request->validate(['name' => 'required', 'description' => 'nullable']);
-        $service->update($validated);
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'icon' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,ico|max:2048'
+        ]);
+
+        if ($request->hasFile('icon')) {
+            $path = $request->file('icon')->store('services', 'public');
+            $service->icon_path = $path;
+        }
+
+        $service->name = $validated['name'];
+        $service->description = $validated['description'] ?? '';
+        $service->save();
+
         return redirect()->back()->with('success', 'Service updated.');
     }
     public function destroyService(Service $service) {

@@ -26,7 +26,7 @@
       <ul class="contacts-list">
         <li class="contact-item" v-if="$page.props.globalProfile?.email">
           <div class="icon-box">
-            <font-awesome-icon icon="fa-regular fa-envelope" />
+            <font-awesome-icon icon="fa-solid fa-envelope" />
           </div>
           <div class="contact-info">
             <p class="contact-title">Email</p>

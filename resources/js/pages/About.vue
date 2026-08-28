@@ -30,7 +30,8 @@ const props = defineProps({
             <ul class="service-list">
                 <li class="service-item" v-for="item in props.services" :key="item.id">
                     <div class="service-icon-box">
-                        <img :src="item.icon_path ? `/storage/${item.icon_path}` : `/assets/images/${item.icon_path}`" :alt="item.name" width="40" />
+                        <img v-if="item.icon_path" :src="item.icon_path.startsWith('http') ? item.icon_path : `/storage/${item.icon_path}`" :alt="item.name" width="60" />
+                        <img v-else src="/assets/images/icon-design.svg" :alt="item.name" width="60" />
                     </div>
 
                     <div class="service-content-box">

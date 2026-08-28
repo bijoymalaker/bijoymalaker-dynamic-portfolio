@@ -2,7 +2,7 @@
   <AdminLayout>
 
     <Head title="Manage Profile" />
-    <div class="container">
+    <section class="container">
 
       <h1 class="display-6 fw-bold mb-4">Manage Profile</h1>
       <div class="bg-white p-4 rounded shadow-sm" style="max-width: 800px;">
@@ -83,7 +83,7 @@
           <button type="submit" class="btn btn-primary mt-4" :disabled="form.processing">Save Profile</button>
         </form>
       </div>
-    </div>
+    </section>
   </AdminLayout>
 </template>
 

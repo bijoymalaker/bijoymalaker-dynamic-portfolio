@@ -1,56 +1,63 @@
 <template>
   <AdminLayout>
     <Head title="Manage Education" />
-    <h1 class="text-3xl font-bold mb-6">Manage Education</h1>
+    <div class="container">
+      
+    <h1 class="display-6 fw-bold mb-4">Manage Education</h1>
     
-    <div class="bg-white p-6 rounded-lg shadow mb-8">
-      <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Education' : 'Add Education' }}</h2>
-      <form @submit.prevent="submit" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-gray-700 font-bold mb-2">Degree</label>
-          <input v-model="form.degree" type="text" class="w-full px-3 py-2 border rounded" required />
+    <div class="bg-white p-4 rounded shadow-sm mb-4">
+      <h2 class="h5 fw-semibold mb-3">{{ isEditing ? 'Edit Education' : 'Add Education' }}</h2>
+      <form @submit.prevent="submit" class="row g-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label fw-bold">Degree</label>
+          <input v-model="form.degree" type="text" class="form-control" required />
         </div>
-        <div>
-          <label class="block text-gray-700 font-bold mb-2">Years</label>
-          <input v-model="form.years" type="text" class="w-full px-3 py-2 border rounded" required />
+        <div class="col-12 col-md-6">
+          <label class="form-label fw-bold">Years</label>
+          <input v-model="form.years" type="text" class="form-control" required />
         </div>
-        <div class="md:col-span-2">
-          <label class="block text-gray-700 font-bold mb-2">Institution</label>
-          <input v-model="form.institution" type="text" class="w-full px-3 py-2 border rounded" required />
+        <div class="col-12">
+          <label class="form-label fw-bold">Institution</label>
+          <input v-model="form.institution" type="text" class="form-control" required />
         </div>
-        <div class="md:col-span-2 flex gap-2">
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" :disabled="form.processing">
+        <div class="col-12 d-flex gap-2">
+          <button type="submit" class="btn btn-primary" :disabled="form.processing">
             {{ isEditing ? 'Update Education' : 'Add Education' }}
           </button>
-          <button v-if="isEditing" type="button" @click="cancelEdit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+          <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">
             Cancel
           </button>
         </div>
       </form>
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-      <table class="min-w-full">
-        <thead class="bg-gray-800 text-white">
-          <tr>
-            <th class="py-3 px-4 text-left">Degree</th>
-            <th class="py-3 px-4 text-left">Institution</th>
-            <th class="py-3 px-4 text-left">Years</th>
-            <th class="py-3 px-4 text-left">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="edu in education" :key="edu.id" class="border-b">
-            <td class="py-3 px-4">{{ edu.degree }}</td>
-            <td class="py-3 px-4">{{ edu.institution }}</td>
-            <td class="py-3 px-4">{{ edu.years }}</td>
-            <td class="py-3 px-4 flex gap-2">
-              <button @click="editItem(edu)" class="text-blue-500 hover:text-blue-700">Edit</button>
-              <Link :href="`/admin/education/${edu.id}`" method="delete" as="button" class="text-red-500 hover:text-red-700">Delete</Link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="bg-white rounded shadow-sm overflow-hidden">
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th>Degree</th>
+              <th>Institution</th>
+              <th>Years</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="edu in education" :key="edu.id">
+              <td>{{ edu.degree }}</td>
+              <td>{{ edu.institution }}</td>
+              <td>{{ edu.years }}</td>
+              <td>
+                <div class="d-flex gap-2">
+                  <button @click="editItem(edu)" class="btn btn-link text-primary p-0 text-decoration-none">Edit</button>
+                  <Link :href="`/admin/education/${edu.id}`" method="delete" as="button" class="btn btn-link text-danger p-0 text-decoration-none">Delete</Link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
   </AdminLayout>
 </template>

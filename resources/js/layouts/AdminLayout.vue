@@ -41,6 +41,8 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toast-notification';
 import { watch } from 'vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 
 const page = usePage();
 const $toast = useToast();

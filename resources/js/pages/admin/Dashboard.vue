@@ -1,20 +1,29 @@
 <template>
   <AdminLayout>
     <Head title="Admin Dashboard" />
-    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-2">Total Projects</h2>
-        <p class="text-4xl text-blue-600">{{ stats.projects }}</p>
+    <div class="container">
+      
+    <h1 class="display-6 fw-bold mb-4">Dashboard</h1>
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="h5 fw-semibold mb-2">Total Projects</h2>
+          <p class="display-6 text-primary">{{ stats.projects }}</p>
+        </div>
       </div>
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-2">Total Services</h2>
-        <p class="text-4xl text-green-600">{{ stats.services }}</p>
+      <div class="col-12 col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="h5 fw-semibold mb-2">Total Services</h2>
+          <p class="display-6 text-success">{{ stats.services }}</p>
+        </div>
       </div>
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-2">Messages</h2>
-        <p class="text-4xl text-yellow-600">{{ stats.messages }}</p>
+      <div class="col-12 col-md-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="h5 fw-semibold mb-2">Messages</h2>
+          <p class="display-6 text-warning">{{ stats.messages }}</p>
+        </div>
       </div>
+    </div>
     </div>
   </AdminLayout>
 </template>

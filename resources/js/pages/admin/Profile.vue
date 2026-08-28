@@ -1,81 +1,84 @@
 <template>
   <AdminLayout>
     <Head title="Manage Profile" />
-    <h1 class="text-3xl font-bold mb-6">Manage Profile</h1>
-    <div class="bg-white p-6 rounded-lg shadow max-w-2xl">
+    <div class="container">
+      
+    <h1 class="display-6 fw-bold mb-4">Manage Profile</h1>
+    <div class="bg-white p-4 rounded shadow-sm" style="max-width: 800px;">
       <form @submit.prevent="submit">
-        <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2">Name</label>
-          <input v-model="form.name" type="text" class="w-full px-3 py-2 border rounded" required />
+        <div class="mb-3">
+          <label class="form-label fw-bold">Name</label>
+          <input v-model="form.name" type="text" class="form-control" required />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2">Title</label>
-          <input v-model="form.title" type="text" class="w-full px-3 py-2 border rounded" required />
+        <div class="mb-3">
+          <label class="form-label fw-bold">Title</label>
+          <input v-model="form.title" type="text" class="form-control" required />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2">Bio Paragraph 1</label>
-          <textarea v-model="form.bio1" class="w-full px-3 py-2 border rounded h-32" required></textarea>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Bio Paragraph 1</label>
+          <textarea v-model="form.bio1" class="form-control" style="height: 120px;" required></textarea>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2">Bio Paragraph 2</label>
-          <textarea v-model="form.bio2" class="w-full px-3 py-2 border rounded h-32"></textarea>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Bio Paragraph 2</label>
+          <textarea v-model="form.bio2" class="form-control" style="height: 120px;"></textarea>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="row g-3">
           <!-- Avatar -->
-          <div class="mb-4 md:col-span-2">
-            <label class="block text-gray-700 font-bold mb-2">Avatar Image</label>
-            <div class="flex items-center gap-4">
-              <img v-if="props.profile?.avatar_path" :src="props.profile.avatar_path.startsWith('http') ? props.profile.avatar_path : `/storage/${props.profile.avatar_path}`" class="w-16 h-16 rounded-full object-cover" />
-              <input type="file" @change="e => form.avatar = e.target.files[0]" class="w-full px-3 py-2 border rounded" accept="image/*" />
+          <div class="col-12">
+            <label class="form-label fw-bold">Avatar Image</label>
+            <div class="d-flex align-items-center gap-3">
+              <img v-if="props.profile?.avatar_path" :src="props.profile.avatar_path.startsWith('http') ? props.profile.avatar_path : `/storage/${props.profile.avatar_path}`" class="rounded-circle object-fit-cover" style="width: 64px; height: 64px;" />
+              <input type="file" @change="e => form.avatar = e.target.files[0]" class="form-control" accept="image/*" />
             </div>
           </div>
 
           <!-- Contact Info -->
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Email</label>
-            <input v-model="form.email" type="email" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Email</label>
+            <input v-model="form.email" type="email" class="form-control" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Phone</label>
-            <input v-model="form.phone" type="text" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Phone</label>
+            <input v-model="form.phone" type="text" class="form-control" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Birthday</label>
-            <input v-model="form.birthday" type="text" class="w-full px-3 py-2 border rounded" placeholder="e.g. October 06, 2000" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Birthday</label>
+            <input v-model="form.birthday" type="text" class="form-control" placeholder="e.g. October 06, 2000" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Location</label>
-            <input v-model="form.location" type="text" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Location</label>
+            <input v-model="form.location" type="text" class="form-control" />
           </div>
 
           <!-- Social Links -->
-          <div class="mb-4 md:col-span-2">
-            <h3 class="text-lg font-semibold text-gray-700 mb-2 border-b pb-2">Social Links</h3>
+          <div class="col-12 mt-4">
+            <h3 class="h5 fw-semibold text-secondary mb-3 border-bottom pb-2">Social Links</h3>
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Facebook URL</label>
-            <input v-model="form.facebook" type="url" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Facebook URL</label>
+            <input v-model="form.facebook" type="url" class="form-control" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Twitter/X URL</label>
-            <input v-model="form.twitter" type="url" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Twitter/X URL</label>
+            <input v-model="form.twitter" type="url" class="form-control" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Instagram URL</label>
-            <input v-model="form.instagram" type="url" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">Instagram URL</label>
+            <input v-model="form.instagram" type="url" class="form-control" />
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">GitHub URL</label>
-            <input v-model="form.github" type="url" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12 col-md-6">
+            <label class="form-label fw-bold">GitHub URL</label>
+            <input v-model="form.github" type="url" class="form-control" />
           </div>
-          <div class="mb-4 md:col-span-2">
-            <label class="block text-gray-700 font-bold mb-2">LinkedIn URL</label>
-            <input v-model="form.linkedin" type="url" class="w-full px-3 py-2 border rounded" />
+          <div class="col-12">
+            <label class="form-label fw-bold">LinkedIn URL</label>
+            <input v-model="form.linkedin" type="url" class="form-control" />
           </div>
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4" :disabled="form.processing">Save Profile</button>
+        <button type="submit" class="btn btn-primary mt-4" :disabled="form.processing">Save Profile</button>
       </form>
+    </div>
     </div>
   </AdminLayout>
 </template>

@@ -14,18 +14,17 @@
         </li>
       </ul>
 
-      <div class="filter-select-box" @click="toggleDropdown">
-        <button class="filter-select">
+      <div class="filter-select-box" ref="selectBoxRef">
+        <button class="filter-select" :class="{ active: dropdownOpen }" @click="toggleDropdown">
           <div class="select-value">{{ selectedCategory }}</div>
           <div class="select-icon">
-            <ion-icon :name="dropdownOpen ? 'chevron-up' : 'chevron-down'"></ion-icon>
+            <font-awesome-icon icon="fa-solid fa-chevron-down" />
           </div>
         </button>
 
-        <ul v-if="dropdownOpen" class="dropdown-menu dropdown">
-          <li class="dropdown-item" v-for="(category, index) in Categories" :key="index">
-            <button @click.stop="selectCategory(category)" class="dropdown-button filter-select"
-              style="margin: 3px 20px">
+        <ul class="select-list">
+          <li class="select-item" v-for="(category, index) in Categories" :key="index">
+            <button @click="selectCategory(category)">
               {{ category }}
             </button>
           </li>
@@ -38,10 +37,9 @@
             <figure class="project-img">
               <div class="project-item-icon-box">
                 <font-awesome-icon icon="fa-regular fa-eye" />
-                <ion-icon name="eye-outline"></ion-icon>
               </div>
 
-              <img :src="project.image_path ? `/storage/${project.image_path}` : `/assets/images/${project.image_path}`" :alt="project.title" loading="lazy" />
+              <img :src="getImageUrl(project.image_path)" :alt="project.title" loading="lazy" />
             </figure>
 
             <h3 class="project-title">{{ project.title }}</h3>
@@ -54,8 +52,9 @@
   </article>
 </template>
 <script setup>
-import { ref, computed, defineProps } from 'vue';
+import { ref, computed } from 'vue';
 import { Head } from '@inertiajs/vue3';
+import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
   projects: Array
@@ -63,11 +62,16 @@ const props = defineProps({
 
 const selectedCategory = ref('All');
 const dropdownOpen = ref(false);
+const selectBoxRef = ref(null);
+
+onClickOutside(selectBoxRef, () => {
+  dropdownOpen.value = false;
+});
 
 const Projects = computed(() => props.projects || []);
 
 const Categories = computed(() => {
-  const cats = Projects.value.map((p) => p.category);
+  const cats = Projects.value.map((p) => p.category).filter(Boolean);
   const unique = [...new Set(cats)];
   return ['All', ...unique];
 });
@@ -89,6 +93,12 @@ function toggleDropdown() {
 function selectCategory(category) {
   selectedCategory.value = category;
   dropdownOpen.value = false;
+}
+
+function getImageUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('/')) return path;
+  return `/storage/${path}`;
 }
 </script>
 <style></style>

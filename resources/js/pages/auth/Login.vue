@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-card">
-      <h2 class="login-title">Admin Login</h2>
+      <h2 class="login-title text-white">Admin Login</h2>
       
       <div v-if="Object.keys(form.errors).length > 0" class="error-messages">
         <ul>
@@ -64,7 +64,6 @@ const submit = () => {
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #1f2937;
 }
 
 .error-messages {
@@ -89,10 +88,10 @@ const submit = () => {
 
 .form-group label {
   display: block;
-  color: #374151;
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
+  color: white; 
 }
 
 .form-group input {
